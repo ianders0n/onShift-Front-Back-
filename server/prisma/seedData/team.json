@@ -1,0 +1,27 @@
+[
+    {
+      "teamName": "Davis Student Union",
+      "productOwnerUserId": 11,
+      "projectManagerUserId": 2
+    },
+    {
+      "teamName": "Freeman",
+      "productOwnerUserId": 13,
+      "projectManagerUserId": 4
+    },
+    {
+      "teamName": "Ferguson",
+      "productOwnerUserId": 15,
+      "projectManagerUserId": 6
+    },
+    {
+      "teamName": "Outdoor Services",
+      "productOwnerUserId": 17,
+      "projectManagerUserId": 8
+    },
+    {
+      "teamName": "Audio and Visual",
+      "productOwnerUserId": 19,
+      "projectManagerUserId": 10
+    }
+  ]
