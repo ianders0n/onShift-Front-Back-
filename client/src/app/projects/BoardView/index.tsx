@@ -138,7 +138,7 @@ const Task = ({ task }: TaskProps) => {
     return (
         <div ref={(instance) => { drag(instance); }} className={`mb-4 rounded-md bg-white shadow dark:bg-dark-secondary ${isDragging ? "opacity-50" : "opacity-100"}`}>
             {task.attachments && task.attachments.length > 0 && (
-                <Image src={`/${task.attachments[0].fileURL}`} alt={task.attachments[0].fileName} width={400} height={200} className="h-auto w-full rounded-t-md"/>
+                <Image src={`https://capstone-bucket2024.s3.us-east-1.amazonaws.com/${task.attachments[0].fileURL}`} alt={task.attachments[0].fileName} width={400} height={200} className="h-auto w-full rounded-t-md"/>
             )}
             <div className="p-4 md:p-6">
                 <div className="flex items-start justify-between">
@@ -180,10 +180,10 @@ const Task = ({ task }: TaskProps) => {
                 <div className="mt-3 flex items-center justify-between">
                     <div className="flex -space-x-[6px] overflow-hidden">
                         {task.assignee && (
-                            <Image key={task.assignee.userId} src={`/${task.assignee.profilePictureUrl!}`} alt={task.assignee.username} width={30} height={30} className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"/>
+                            <Image key={task.assignee.userId} src={`https://capstone-bucket2024.s3.us-east-1.amazonaws.com/${task.assignee.profilePictureUrl!}`} alt={task.assignee.username} width={30} height={30} className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"/>
                         )}
                         {task.author && (
-                            <Image key={task.author.userId} src={`/${task.author.profilePictureUrl!}`} alt={task.author.username} width={30} height={30} className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"/>
+                            <Image key={task.author.userId} src={`https://capstone-bucket2024.s3.us-east-1.amazonaws.com/${task.author.profilePictureUrl!}`} alt={task.author.username} width={30} height={30} className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"/>
                         )}
                     </div>
                     <div className="flex items-center text-gray-500 dark:text-neutral-500">
