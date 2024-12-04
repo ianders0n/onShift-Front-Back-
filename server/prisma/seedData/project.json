@@ -1,72 +1,72 @@
 [
     {
       "id": 1,
-      "name": "Apollo",
-      "description": "A space exploration project.",
-      "startDate": "2023-01-01T00:00:00Z",
-      "endDate": "2023-12-31T00:00:00Z"
-    },
-    {
-      "id": 2,
-      "name": "Beacon",
-      "description": "Developing advanced navigation systems.",
-      "startDate": "2023-02-01T00:00:00Z",
-      "endDate": "2023-10-15T00:00:00Z"
-    },
-    {
-      "id": 3,
-      "name": "Catalyst",
-      "description": "A project to boost renewable energy use.",
-      "startDate": "2023-03-05T00:00:00Z",
-      "endDate": "2024-03-05T00:00:00Z"
-    },
-    {
-      "id": 4,
-      "name": "Delta",
-      "description": "Delta project for new software development techniques.",
-      "startDate": "2023-01-20T00:00:00Z",
-      "endDate": "2023-09-20T00:00:00Z"
-    },
-    {
-      "id": 5,
-      "name": "Echo",
-      "description": "Echo project focused on AI advancements.",
-      "startDate": "2023-04-15T00:00:00Z",
-      "endDate": "2023-11-30T00:00:00Z"
-    },
-    {
-      "id": 6,
-      "name": "Foxtrot",
-      "description": "Exploring cutting-edge biotechnology.",
-      "startDate": "2023-02-25T00:00:00Z",
-      "endDate": "2023-08-25T00:00:00Z"
-    },
-    {
-      "id": 7,
-      "name": "Golf",
-      "description": "Development of new golf equipment using AI.",
-      "startDate": "2023-05-10T00:00:00Z",
-      "endDate": "2023-12-10T00:00:00Z"
-    },
-    {
-      "id": 8,
-      "name": "Hotel",
-      "description": "Hotel management system overhaul.",
-      "startDate": "2023-03-01T00:00:00Z",
+      "name": "Basketball Game",
+      "description": "Setup bleachers",
+      "startDate": "2024-01-01T00:00:00Z",
       "endDate": "2024-01-01T00:00:00Z"
     },
     {
+      "id": 2,
+      "name": "BOV",
+      "description": "Set Freeman rooms for BOV",
+      "startDate": "2024-02-01T00:00:00Z",
+      "endDate": "2024-02-02T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "AFD",
+      "description": "Admitted Freshman Day",
+      "startDate": "2024-03-05T00:00:00Z",
+      "endDate": "2024-03-07T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Commencement",
+      "description": "Graduation setup, breakdown, and prep",
+      "startDate": "2024-05-20T00:00:00Z",
+      "endDate": "2024-05-27T00:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Tailgate",
+      "description": "Football game logistics",
+      "startDate": "2024-10-19T00:00:00Z",
+      "endDate": "2023-10-19T00:00:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Welcome Week",
+      "description": "All events encompassing welcome week",
+      "startDate": "2024-08-20T00:00:00Z",
+      "endDate": "2024-08-27T00:00:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Open House",
+      "description": "Open house for potential new students",
+      "startDate": "2024-010-10T00:00:00Z",
+      "endDate": "2024-10-10T00:00:00Z"
+    },
+    {
+      "id": 8,
+      "name": "President's Desserts",
+      "description": "Set up and break down of 3 Oaks",
+      "startDate": "2024-09-01T00:00:00Z",
+      "endDate": "2024-09-02T00:00:00Z"
+    },
+    {
       "id": 9,
-      "name": "India",
-      "description": "Telecommunication infrastructure upgrade.",
-      "startDate": "2023-06-01T00:00:00Z",
-      "endDate": "2023-12-01T00:00:00Z"
+      "name": "Acheivable Dream",
+      "description": "Event in Ballroom",
+      "startDate": "2024-12-01T00:00:00Z",
+      "endDate": "2024-12-01T00:00:00Z"
     },
     {
       "id": 10,
-      "name": "Juliet",
-      "description": "Initiative to enhance cyber-security measures.",
-      "startDate": "2023-07-01T00:00:00Z",
-      "endDate": "2024-02-01T00:00:00Z"
+      "name": "Light the Night",
+      "description": "Set up and break down ",
+      "startDate": "2024-08-28T00:00:00Z",
+      "endDate": "2024-08-29T00:00:00Z"
     }
   ]
