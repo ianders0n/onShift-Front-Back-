@@ -84,8 +84,8 @@
       "status": "Work In Progress",
       "priority": "Urgent",
       "tags": "Setup",
-      "startDate": "2024-010-10T00:00:00Z",
-      "dueDate": "2024-010-10T00:00:00Z",
+      "startDate": "2024-10-10T00:00:00Z",
+      "dueDate": "2024-10-10T00:00:00Z",
       "projectId": 7,
       "authorUserId": 13,
       "assignedUserId": 14
