@@ -20,17 +20,37 @@ const Timeline = () => {
 
   const ganttTasks = useMemo(() => {
     return (
-      projects?.map((project) => ({
-        start: new Date(project.startDate as string),
-        end: new Date(project.endDate as string),
-        name: project.name,
-        id: `Project-${project.id}`,
-        type: "project" as TaskTypeItems,
-        progress: 50,
-        isDisabled: false,
-      })) || []
+      projects?.map((project) => {
+        let startDate = project?.startDate ? new Date(project.startDate) : null;
+        let endDate = project?.endDate ? new Date(project.endDate) : null;
+  
+        // Check if dates are valid
+        if (startDate && isNaN(startDate.getTime())) {
+          console.warn(`Invalid startDate for project: ${project.name}`, project);
+          startDate = null;
+        }
+        if (endDate && isNaN(endDate.getTime())) {
+          console.warn(`Invalid endDate for project: ${project.name}`, project);
+          endDate = null;
+        }
+  
+        // Provide fallback values
+        startDate = startDate || new Date();
+        endDate = endDate || new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000); // 1 week after startDate
+  
+        return {
+          start: startDate,
+          end: endDate,
+          name: project.name,
+          id: `Project-${project.id}`,
+          type: "project" as TaskTypeItems,
+          progress: 50,
+          isDisabled: false,
+        };
+      }) || []
     );
   }, [projects]);
+  
 
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
