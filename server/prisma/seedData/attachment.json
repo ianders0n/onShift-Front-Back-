@@ -2,70 +2,70 @@
     {
       "id": 1,
       "fileURL": "i1.jpg",
-      "fileName": "DesignDoc.pdf",
+      "fileName": "FloorPlan1.pdf",
       "taskId": 1,
       "uploadedById": 1
     },
     {
       "id": 2,
       "fileURL": "i2.jpg",
-      "fileName": "NavAlgorithm.pdf",
+      "fileName": "FloorPlan2.pdf",
       "taskId": 2,
       "uploadedById": 3
     },
     {
       "id": 3,
       "fileURL": "i3.jpg",
-      "fileName": "EnergySolutions.pdf",
+      "fileName": "FloorPlan3.pdf",
       "taskId": 3,
       "uploadedById": 5
     },
     {
       "id": 4,
       "fileURL": "i4.jpg",
-      "fileName": "SoftwareWorkflow.pdf",
+      "fileName": "FloorPlan4.pdf",
       "taskId": 4,
       "uploadedById": 7
     },
     {
       "id": 5,
       "fileURL": "i5.jpg",
-      "fileName": "AIPredictions.pdf",
+      "fileName": "FloorPlan5.pdf",
       "taskId": 5,
       "uploadedById": 9
     },
     {
       "id": 6,
       "fileURL": "i6.jpg",
-      "fileName": "BiotechTest.pdf",
+      "fileName": "FloorPlan6.pdf",
       "taskId": 6,
       "uploadedById": 11
     },
     {
       "id": 7,
       "fileURL": "i7.jpg",
-      "fileName": "GolfAI.pdf",
+      "fileName": "FloorPlan7.pdf",
       "taskId": 7,
       "uploadedById": 13
     },
     {
       "id": 8,
       "fileURL": "i8.jpg",
-      "fileName": "HotelDB.pdf",
+      "fileName": "FloorPlan8.pdf",
       "taskId": 8,
       "uploadedById": 15
     },
     {
       "id": 9,
       "fileURL": "i9.jpg",
-      "fileName": "TelecomUpgrade.pdf",
+      "fileName": "FloorPlan9.pdf",
       "taskId": 9,
       "uploadedById": 17
     },
     {
       "id": 10,
       "fileURL": "i10.jpg",
-      "fileName": "SecurityProtocol.pdf",
+      "fileName": "FloorPlan10.pdf",
       "taskId": 10,
       "uploadedById": 19
     }

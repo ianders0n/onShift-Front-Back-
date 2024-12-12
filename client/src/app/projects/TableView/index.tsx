@@ -1,15 +1,16 @@
-import { useAppSelector } from "@/app/redux";
-import Header from "@/components/Header";
-import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
-import { useGetTasksQuery } from "@/state/api";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import React from "react";
+import { useAppSelector } from "@/app/redux"; // Custom Redux hook to access global state.
+import Header from "@/components/Header"; // Reusable header component for the page.
+import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils"; // Utility classes and styles for the DataGrid.
+import { useGetTasksQuery } from "@/state/api"; // API hook to fetch tasks.
+import { DataGrid, GridColDef } from "@mui/x-data-grid"; // DataGrid component for rendering tabular data.
+import React from "react"; // React library for component creation.
 
 type Props = {
-  id: string;
-  setIsModalNewTaskOpen: (isOpen: boolean) => void;
+  id: string; // Project ID for fetching tasks.
+  setIsModalNewTaskOpen: (isOpen: boolean) => void; // Function to toggle the "Add Task" modal.
 };
 
+// Define the columns for the DataGrid, including headers and cell rendering.
 const columns: GridColDef[] = [
   {
     field: "title",
@@ -65,15 +66,19 @@ const columns: GridColDef[] = [
   },
 ];
 
+// Component to render a table view of tasks.
 const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  // Fetch tasks for the given project ID using the API hook.
   const {
     data: tasks,
     error,
     isLoading,
   } = useGetTasksQuery({ projectId: Number(id) });
 
+  // Display a loading message while fetching tasks.
   if (isLoading) return <div>Loading...</div>;
+  // Display an error message if there was an issue fetching tasks.
   if (error || !tasks) return <div>An error occurred while fetching tasks</div>;
 
   return (

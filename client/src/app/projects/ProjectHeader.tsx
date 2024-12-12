@@ -1,20 +1,21 @@
-import Header from '@/components/Header';
-import { Clock, Filter, Grid3x3, List, PlusSquare, Share2, Table } from 'lucide-react';
-import React, { useState } from 'react'
-import ModalNewProject from './ModalNewProject';
+import Header from '@/components/Header'; // Reusable header component.
+import { Clock, Filter, Grid3x3, List, PlusSquare, Share2, Table } from 'lucide-react'; // Icon library for UI elements.
+import React, { useState } from 'react'; // React library for state and component management.
+import ModalNewProject from './ModalNewProject'; // Modal component for creating a new project.
 
 type Props = {
-    activeTab: string;
-    setActiveTab: (tabName: string) => void
+    activeTab: string; // Currently active tab.
+    setActiveTab: (tabName: string) => void  // Function to update the active tab.
 }
 
+// Component for rendering the project header and tab navigation.
 const ProjectHeader = ({activeTab, setActiveTab}: Props) => {
     const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
   return (
     <div className='px-4 xl:px-6'>
         <ModalNewProject isOpen={isModalNewProjectOpen} onClose={() => setIsModalNewProjectOpen(false)}/>
         <div className='pb-6 pt-6 lg:pb-4 lg:pt-8'>
-            <Header name="Product Design Development" buttonComponent={
+            <Header name="Campus Events" buttonComponent={
                 <button className='flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600' onClick={() => setIsModalNewProjectOpen(true)}>
                     <PlusSquare className='mr-2 h-5 w-5'/>
                     New Boards
@@ -47,11 +48,13 @@ const ProjectHeader = ({activeTab, setActiveTab}: Props) => {
 }
 
 type TabButtonProps = {
-    name: string;
-    icon: React.ReactNode;
-    setActiveTab: (tabName: string) => void;
-    activeTab: string;
-}
+    name: string; // Name of the tab.
+    icon: React.ReactNode; // Icon for the tab.
+    setActiveTab: (tabName: string) => void; // Function to update the active tab.
+    activeTab: string; // Currently active tab.
+  };
+
+// Component for rendering individual tab buttons.
 const TabButton = ({name, icon, setActiveTab, activeTab}: TabButtonProps) => {
     const isActive = activeTab === name;
 

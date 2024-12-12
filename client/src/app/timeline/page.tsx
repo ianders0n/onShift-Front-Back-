@@ -1,23 +1,27 @@
 "use client";
 
-import { useAppSelector } from "@/app/redux";
-import Header from "@/components/Header";
-import { useGetProjectsQuery } from "@/state/api";
-import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
-import "gantt-task-react/dist/index.css";
-import React, { useMemo, useState } from "react";
+import { useAppSelector } from "@/app/redux"; // Custom Redux hook to access global state.
+import Header from "@/components/Header"; // Reusable header component.
+import { useGetProjectsQuery } from "@/state/api"; // API hook to fetch project data.
+import { DisplayOption, Gantt, ViewMode } from "gantt-task-react"; // Gantt chart library for task visualization.
+import "gantt-task-react/dist/index.css"; // Import Gantt chart styles.
+import React, { useMemo, useState } from "react"; // React library and hooks for state and memoization.
 
+// Define task types for the Gantt chart.
 type TaskTypeItems = "task" | "milestone" | "project";
 
 const Timeline = () => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  // Fetch project data using the API hook.
   const { data: projects, isLoading, isError } = useGetProjectsQuery();
 
+  // State for managing Gantt chart display options.
   const [displayOptions, setDisplayOptions] = useState<DisplayOption>({
-    viewMode: ViewMode.Month,
-    locale: "en-US",
+    viewMode: ViewMode.Month, // Default view mode is "Month".
+    locale: "en-US", // Default locale for the Gantt chart.
   });
 
+  // Transform projects into a format compatible with the Gantt chart.
   const ganttTasks = useMemo(() => {
     return (
       projects?.map((project) => {
@@ -49,9 +53,10 @@ const Timeline = () => {
         };
       }) || []
     );
-  }, [projects]);
+  }, [projects]); // Recalculate only when `projects` changes.
   
 
+  // Handle changes to the Gantt chart view mode.
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {

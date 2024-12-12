@@ -1,17 +1,23 @@
-
+// This directive ensures the component is rendered on the client side.
 "use client";
 
+// Import types and API hooks for fetching tasks and projects.
 import {
   Priority,
   Project,
   Task,
   useGetProjectsQuery,
   useGetTasksQuery,
-} from "@/state/api";
+} from "@/state/api"; 
+// React is used to create the functional component.
 import React from "react";
+// Custom Redux hook to access global state.
 import { useAppSelector } from "../redux";
+// DataGrid for displaying tabular data.
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+// Reusable header component.
 import Header from "@/components/Header";
+// Charting library for visualizing data.
 import {
   Bar,
   BarChart,
@@ -25,31 +31,41 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+// Utility classes and styles for the DataGrid.
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
 const taskColumns: GridColDef[] = [
+  // Column for task title.
   { field: "title", headerName: "Title", width: 200 },
+  // Column for task status.
   { field: "status", headerName: "Status", width: 150 },
+  // Column for task priority.
   { field: "priority", headerName: "Priority", width: 150 },
+  // Column for task due date.
   { field: "dueDate", headerName: "Due Date", width: 150 },
 ];
 
+// Colors used in the pie chart.
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const HomePage = () => {
+  // Fetch tasks and projects data using custom hooks.
   const {
     data: tasks,
     isLoading: tasksLoading,
     isError: tasksError,
-  } = useGetTasksQuery({ projectId: parseInt("1") });
+  } = useGetTasksQuery({ projectId: parseInt("1") }); // Fetch tasks with a hardcoded projectId of 1.
   const { data: projects, isLoading: isProjectsLoading } =
-    useGetProjectsQuery();
+    useGetProjectsQuery(); // Fetch all projects.
 
+  // Get dark mode status from global state.
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
+  // Handle loading and error states.
   if (tasksLoading || isProjectsLoading) return <div>Loading..</div>;
   if (tasksError || !tasks || !projects) return <div>Error fetching data</div>;
 
+  // Calculate task priority distribution.
   const priorityCount = tasks.reduce(
     (acc: Record<string, number>, task: Task) => {
       const { priority } = task;
@@ -59,11 +75,13 @@ const HomePage = () => {
     {},
   );
 
+  // Transform priority count into chart-compatible format.
   const taskDistribution = Object.keys(priorityCount).map((key) => ({
     name: key,
     count: priorityCount[key],
   }));
 
+  // Calculate project status distribution.
   const statusCount = projects.reduce(
     (acc: Record<string, number>, project: Project) => {
       const status = project.endDate ? "Completed" : "Active";
@@ -73,11 +91,13 @@ const HomePage = () => {
     {},
   );
 
+  // Transform project status into chart-compatible format.
   const projectStatus = Object.keys(statusCount).map((key) => ({
     name: key,
     count: statusCount[key],
   }));
 
+  // Define chart colors based on theme mode.
   const chartColors = isDarkMode
     ? {
         bar: "#8884d8",

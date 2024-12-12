@@ -1,18 +1,19 @@
 "use client";
-import { useGetUsersQuery } from "@/state/api";
-import React from "react";
-import { useAppSelector } from "../redux";
-import Header from "@/components/Header";
+import { useGetUsersQuery } from "@/state/api"; // API hook to fetch users.
+import React from "react"; // React library for component creation.
+import { useAppSelector } from "../redux"; // Custom Redux hook to access global state.
+import Header from "@/components/Header"; // Reusable header component.
 import {
   DataGrid,
   GridColDef,
   GridToolbarContainer,
   GridToolbarExport,
   GridToolbarFilterButton,
-} from "@mui/x-data-grid";
-import Image from "next/image";
-import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
+} from "@mui/x-data-grid"; // DataGrid and toolbar components for displaying and interacting with tabular data.
+import Image from "next/image"; // Next.js optimized image component.
+import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils"; // Utility classes and styles for the DataGrid.
 
+// Custom toolbar for the DataGrid with export and filter buttons.
 const CustomToolbar = () => (
   <GridToolbarContainer className="toolbar flex gap-2">
     <GridToolbarFilterButton />
@@ -20,6 +21,7 @@ const CustomToolbar = () => (
   </GridToolbarContainer>
 );
 
+// Define the column structure for the DataGrid.
 const columns: GridColDef[] = [
   { field: "userId", headerName: "ID", width: 100 },
   { field: "username", headerName: "Username", width: 150 },
@@ -28,6 +30,7 @@ const columns: GridColDef[] = [
     headerName: "Profile Picture",
     width: 100,
     renderCell: (params) => (
+      // Render user profile picture using the `next/image` component.
       <div className="flex h-full w-full items-center justify-center">
         <div className="h-9 w-9">
           <Image
@@ -43,6 +46,7 @@ const columns: GridColDef[] = [
   },
 ];
 
+// Functional component for displaying a list of users.
 const Users = () => {
   const { data: users, isLoading, isError } = useGetUsersQuery();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);

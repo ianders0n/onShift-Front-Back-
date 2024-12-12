@@ -12,6 +12,7 @@ import {
 } from "@mui/x-data-grid";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
+// Custom toolbar for the DataGrid.
 const CustomToolbar = () => (
   <GridToolbarContainer className="toolbar flex gap-2">
     <GridToolbarFilterButton />
@@ -19,6 +20,7 @@ const CustomToolbar = () => (
   </GridToolbarContainer>
 );
 
+// Define the column structure for the DataGrid.
 const columns: GridColDef[] = [
   { field: "id", headerName: "Team ID", width: 100 },
   { field: "teamName", headerName: "Team Name", width: 200 },
@@ -30,7 +32,9 @@ const columns: GridColDef[] = [
   },
 ];
 
+// Functional component to display teams.
 const Teams = () => {
+  // Fetch teams data using the API hook.
   const { data: teams, isLoading, isError } = useGetTeamsQuery();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 

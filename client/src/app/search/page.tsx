@@ -1,32 +1,36 @@
-"use client";
+"use client"; // Ensures this component is rendered on the client side.
 
-import Header from "@/components/Header";
-import ProjectCard from "@/components/ProjectCard";
-import TaskCard from "@/components/TaskCard";
-import UserCard from "@/components/UserCard";
-import { useSearchQuery } from "@/state/api";
-import { debounce } from "lodash";
-import React, { useEffect, useState } from "react";
+import Header from "@/components/Header"; // Reusable header component.
+import ProjectCard from "@/components/ProjectCard"; // Component to display individual project details.
+import TaskCard from "@/components/TaskCard"; // Component to display individual task details.
+import UserCard from "@/components/UserCard"; // Component to display individual user details.
+import { useSearchQuery } from "@/state/api"; // API hook for executing search queries.
+import { debounce } from "lodash"; // Utility to debounce the search input.
+import React, { useEffect, useState } from "react"; // React library for component creation and state management.
 
+// Functional component for the search page.
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  // API hook to fetch search results based on the current search term.
   const {
     data: searchResults,
     isLoading,
     isError,
   } = useSearchQuery(searchTerm, {
-    skip: searchTerm.length < 3,
+    skip: searchTerm.length < 3, // Skip the query if the search term has fewer than 3 characters.
   });
 
+  // Debounced function to handle search input changes.
   const handleSearch = debounce(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchTerm(event.target.value);
+      setSearchTerm(event.target.value);  // Update the search term after a delay.
     },
-    500,
+    500, // Delay of 500ms.
   );
 
+  // Cleanup the debounce function on component unmount.
   useEffect(() => {
-    return handleSearch.cancel;
+    return handleSearch.cancel; // Cancel any pending debounced calls.
   }, [handleSearch.cancel]);
 
   return (

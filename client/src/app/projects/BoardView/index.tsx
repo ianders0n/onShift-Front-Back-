@@ -8,25 +8,30 @@ import  Image  from "next/image"
 import { format, formatDate } from "date-fns";
 
 type BoardProps = {
-    id: string;
-    setIsModalNewTaskOpen: (isOpen: boolean) => void;
+    id: string; // Project ID.
+    setIsModalNewTaskOpen: (isOpen: boolean) => void; // Function to toggle the task modal.
 };
 
+// Array defining the possible task statuses.
 const taskStatus = ["To Do", "Work In Progress", "Under Review", "Completed"];
 
 const BoardView = ({id, setIsModalNewTaskOpen}: BoardProps) => {
+    // Fetch tasks for a specific project using the project ID.
     const {
         data: tasks,
         isLoading,
         error,
     } = useGetTasksQuery({ projectId: Number(id)});
 
+    // Mutation for updating a task's status.
     const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
+    // Function to move a task to a new status.
     const moveTask = (taskId: number, toStatus: string) => {
         updateTaskStatus({taskId, status: toStatus});
     };
 
+    // Show loading or error messages if necessary.
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>Error occured while fetching tasks</div>
 
@@ -49,11 +54,11 @@ const BoardView = ({id, setIsModalNewTaskOpen}: BoardProps) => {
 };
 
 type TaskColumnProps = {
-    status: string;
-    tasks: TaskType[];
-    moveTask: (taskId: number, toStatus: string) => void;
-    setIsModalNewTaskOpen: (isOpen: boolean) => void;
-}
+    status: string; // Task status for this column.
+    tasks: TaskType[]; // List of tasks to display in the column.
+    moveTask: (taskId: number, toStatus: string) => void; // Function to move a task.
+    setIsModalNewTaskOpen: (isOpen: boolean) => void; // Function to open the new task modal.
+  };
 
 const TaskColumn = ({
     status,
@@ -61,16 +66,19 @@ const TaskColumn = ({
     moveTask,
     setIsModalNewTaskOpen,
 }: TaskColumnProps) => {
+    // Define drop functionality for dragging tasks into this column.
     const [{ isOver }, drop] = useDrop(() => ({
-        accept: "task",
-        drop: (item: {id: number}) => moveTask(item.id, status),
-        collect: (monitor: any) => ({
-            isOver: !!monitor.isOver()
-        })
-    }));
+        accept: "task", // Accept only "task" draggable items.
+        drop: (item: { id: number }) => moveTask(item.id, status), // Update the task's status.
+        collect: (monitor) => ({
+          isOver: !!monitor.isOver(), // Indicate if a task is being dragged over.
+        }),
+      }));
 
+    // Count the number of tasks in this column's status.
     const tasksCount = tasks.filter((task) => task.status === status).length;
 
+    // Map status to specific colors.
     const statusColor: any = {
         "To Do": "2563EB",
         "Work In Progress": "#059669",
@@ -109,26 +117,30 @@ const TaskColumn = ({
 }
 
 type TaskProps = {
-    task: TaskType;
+    task: TaskType; // Task details.
 };
 
 const Task = ({ task }: TaskProps) => {
+    // Define drag functionality for tasks.
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: "task",
-        item: { id: task.id },
-        collect: (monitor: any) => ({
-            isDragging: !!monitor.isDragging(),
-        }),
+      type: "task", // Task type for drag-and-drop.
+      item: { id: task.id }, // Item being dragged.
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(), // Indicate if the task is being dragged.
+      }),
     }));
 
+    // Format tags, start date, and due date for display.
     const taskTagsSplit = task.tags ? task.tags.split(",") : [];
 
     const formattedStartDate = task.startDate ? format(new Date(task.startDate), "P" ) : "";
 
     const formattedDueDate = task.dueDate ? format(new Date(task.dueDate), "P" ) : "";
 
+    // Determine the number of comments on the task.
     const numberOfComments = (task.comments && task.comments.length) || 0;
 
+    // Render a priority tag based on the task's priority level.
     const PriorityTag = ({ priority } : { priority: TaskType["priority"]}) => (
         <div className={`rounded-full px-2 py-1 text-xs font-semibold ${priority === "Urgent" ? "bg-red-200 text-red-700" : priority === "High" ? "bg-yellow-200 text-yellow-700" : priority === "Medium" ? "bg-green-200 text-green-700" : priority === "Low" ? "bg-blue-200 text-blue-700" : "bg-gray-200 text-gray-700"}`}>
             {priority}

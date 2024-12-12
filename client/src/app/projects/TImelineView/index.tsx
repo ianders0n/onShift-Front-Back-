@@ -1,29 +1,33 @@
-import { useAppSelector } from "@/app/redux";
-import { useGetTasksQuery } from "@/state/api";
-import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
-import "gantt-task-react/dist/index.css";
-import React, { useMemo, useState } from "react";
+import { useAppSelector } from "@/app/redux"; // Custom Redux hook to access global state.
+import { useGetTasksQuery } from "@/state/api"; // API hook to fetch tasks for the given project.
+import { DisplayOption, Gantt, ViewMode } from "gantt-task-react"; // Gantt chart library for task visualization.
+import "gantt-task-react/dist/index.css"; // Import Gantt chart styles.
+import React, { useMemo, useState } from "react"; // React library and hooks for state and memoization.
 
 type Props = {
-  id: string;
-  setIsModalNewTaskOpen: (isOpen: boolean) => void;
+  id: string; // Project ID to fetch tasks.
+  setIsModalNewTaskOpen: (isOpen: boolean) => void; // Function to toggle the "Add Task" modal.
+
 };
 
-type TaskTypeItems = "task" | "milestone" | "project";
+type TaskTypeItems = "task" | "milestone" | "project"; // Define task types for the Gantt chart.
 
 const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  // Fetch tasks for the specified project using the API hook.
   const {
     data: tasks,
     error,
     isLoading,
   } = useGetTasksQuery({ projectId: Number(id) });
 
+  // State for managing Gantt chart display options.
   const [displayOptions, setDisplayOptions] = useState<DisplayOption>({
-    viewMode: ViewMode.Month,
-    locale: "en-US",
+    viewMode: ViewMode.Month, // Default view mode is "Month".
+    locale: "en-US", // Default locale for the Gantt chart.
   });
 
+  // Transform tasks into a format compatible with the Gantt chart.
   const ganttTasks = useMemo(() => {
     return (
       tasks?.map((task) => ({
@@ -38,6 +42,7 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     );
   }, [tasks]);
 
+  // Handle changes to the view mode of the Gantt chart.
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -47,6 +52,7 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     }));
   };
 
+  // Show loading or error states if applicable.
   if (isLoading) return <div>Loading...</div>;
   if (error || !tasks) return <div>An error occurred while fetching tasks</div>;
 

@@ -1,14 +1,17 @@
 import Header from "@/components/Header";
 import React from "react";
 
+// Functional component for the settings page.
 const Settings = () => {
+  // Simulated user settings object.
   const userSettings = {
-    username: "johndoe",
-    email: "john.doe@example.com",
-    teamName: "Development Team",
-    roleName: "Developer",
+    username: "johndoe", // Username of the logged-in user.
+    email: "john.doe@example.com", // User's email address.
+    teamName: "Development Team", // Name of the user's team.
+    roleName: "Developer", // User's role in the team.
   };
 
+  // CSS styles for labels and text display.
   const labelStyles = "block text-sm font-medium dark:text-white";
   const textStyles =
     "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dark:text-white";

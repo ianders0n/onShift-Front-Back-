@@ -1,24 +1,33 @@
 
-import Modal from "@/components/Modal";
-import { useCreateProjectMutation } from "@/state/api";
-import React, { useState } from "react";
-import { formatISO } from "date-fns";
+// Import necessary components and hooks.
+import Modal from "@/components/Modal"; // Reusable modal component for displaying the form.
+import { useCreateProjectMutation } from "@/state/api"; // API hook for creating a new project.
+import React, { useState } from "react"; // React library and hooks for managing state.
+import { formatISO } from "date-fns"; // Utility for formatting dates in ISO format.
+
+
 
 type Props = {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean; // Indicates whether the modal is open.
+  onClose: () => void; // Function to close the modal.
 };
 
+// Component for creating a new project inside a modal.
 const ModalNewProject = ({ isOpen, onClose }: Props) => {
+  // Hook for triggering the API mutation to create a project.
   const [createProject, { isLoading }] = useCreateProjectMutation();
+  // State variables for managing form inputs.
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  // Function to handle form submission.
   const handleSubmit = async () => {
+    // Prevent submission if required fields are missing.
     if (!projectName || !startDate || !endDate) return;
 
+    // Format the start and end dates to ISO format.
     const formattedStartDate = formatISO(new Date(startDate), {
       representation: "complete",
     });
@@ -26,6 +35,7 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
       representation: "complete",
     });
 
+    // Call the API to create a new project with the provided details.
     await createProject({
       name: projectName,
       description,
@@ -34,10 +44,12 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
     });
   };
 
+  // Function to validate the form fields.
   const isFormValid = () => {
     return projectName && description && startDate && endDate;
   };
 
+  // Common styles for form inputs.
   const inputStyles =
     "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 

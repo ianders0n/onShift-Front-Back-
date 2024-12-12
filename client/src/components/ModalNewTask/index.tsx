@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import { formatISO } from "date-fns";
 
 type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-  id?: string | null;
+  isOpen: boolean; // Indicates if the modal is open.
+  onClose: () => void; // Function to close the modal.
+  id?: string | null; // Optional ID of the project associated with the task.
 };
 
+// Component to create a new task within a modal.
 const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
+  // Hook for task creation API mutation.
   const [createTask, { isLoading }] = useCreateTaskMutation();
+  // State variables for managing task properties.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<Status>(Status.ToDo);
@@ -22,9 +25,12 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
   const [assignedUserId, setAssignedUserId] = useState("");
   const [projectId, setProjectId] = useState("");
 
+  // Function to handle task submission.
   const handleSubmit = async () => {
+    // Validate required fields before submission.
     if (!title || !authorUserId || !(id !== null || projectId)) return;
 
+    // Format start and due dates to ISO format.
     const formattedStartDate = formatISO(new Date(startDate), {
       representation: "complete",
     });
@@ -32,6 +38,7 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
       representation: "complete",
     });
 
+    // Call the createTask mutation with the task details.
     await createTask({
       title,
       description,
@@ -46,10 +53,12 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
     });
   };
 
+  // Function to validate the form.
   const isFormValid = () => {
     return title && authorUserId && !(id !== null || projectId);
   };
 
+  // Common styles for input and select fields.
   const selectStyles =
     "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
